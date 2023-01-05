@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+ign_*
+.ign_*
+.~lock*.xlsx#
+*.log*
+*.pid
+*.model
+*.modelb64
+node_modules
+app.id

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title class="font-bold">Taller de Aplicaciones 2</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
+</head>
+<body>
+  <div class="h-screen flex flex-col items-center justify-center">
+    <p class="text-green-700 text-xl mb-3">
+      Análisis de sentimiento
+    </p>
+    <div class="form-control w-full max-w-xs">
+      <form class="w-full" id="form-predict">
+        <label class="label">
+          <span class="label-text">Comentario <span class="label-text-alt text-red-700">(en inglés)</span> </span>
+        </label>
+        <input type="text" name="text" placeholder="Type here" required class="input input-bordered w-full max-w-xs" id="input-text" />
+        <button id="button-submit" type="submit" class="mt-3 btn flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded w-full" type="button">
+          Predecir sentimiento
+        </button>
+      <form/>
+    </div>
+
+
+  <div />
+  <div class="mt-5 loading" id="result" style="display:none">
+    <p class="text-green-700 text-xl mb-3">
+      Última predicción
+    </p>
+    <p class="text-green-700 text-xl mb-3 text-center font-bold" id="result-text">
+      Resultado
+    </p>
+
+    <label class="swap swap-flip swap-indeterminate pointer-events-none">
+      
+      <!-- this hidden checkbox controls the state -->
+      <input type="checkbox" id="result-check"/>
+      
+      <!-- sun icon -->
+      <svg class="swap-on fill-current w-40 h-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+        <circle cx="157.651" cy="175.289" r="42.642"/>
+        <circle cx="332.349" cy="175.289" r="42.642"/>
+        <path d="M119.375,325.465c0.837,0.613,56.644,41.466,130.53,41.466c37.205,0,79.015-10.363,120.691-41.452l-18.303-24.554   c-105.857,78.955-210.188,3.26-214.584,0L119.375,325.465z"/>
+        <path d="M69.086,490h351.829C459.001,490,490,459.001,490,420.914V69.086C490,30.991,459.001,0,420.914,0H69.086   C30.999,0,0,30.991,0,69.086v351.829C0,459.001,30.999,490,69.086,490z M30.625,69.086c0-21.204,17.257-38.461,38.461-38.461   h351.829c21.204,0,38.461,17.257,38.461,38.461v351.829c0,21.204-17.257,38.461-38.461,38.461H69.086   c-21.204,0-38.461-17.257-38.461-38.461V69.086z"/>
+      </svg>
+
+      <!-- moon icon -->
+      <svg class="swap-off fill-current w-40 h-40" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+        <path d="M119.39,340.015l18.333,24.539c4.411-3.26,108.773-78.91,214.584,0L370.61,340   C246.211,247.183,120.646,339.088,119.39,340.015z"/>
+        <path d="M159.744,236.096c23.55,0,42.642-19.092,42.642-42.642c0-10.461-3.913-19.915-10.164-27.334h29.405v-30.625H97.856v30.625   h29.409c-6.251,7.419-10.164,16.873-10.164,27.334C117.102,217.004,136.194,236.096,159.744,236.096z"/>
+        <path d="M268.372,166.12h31.504c-6.251,7.419-10.164,16.873-10.164,27.334c0,23.55,19.091,42.642,42.642,42.642   c23.55,0,42.641-19.092,42.641-42.642c0-10.461-3.913-19.915-10.164-27.334h27.327v-30.625H268.372V166.12z"/>
+        <path d="M420.914,0H69.086C30.999,0,0,30.999,0,69.086v351.829C0,459.001,30.999,490,69.086,490h351.829   C459.001,490,490,459.001,490,420.914V69.086C490,30.999,459.001,0,420.914,0z M459.375,420.914   c0,21.204-17.257,38.461-38.461,38.461H69.086c-21.204,0-38.461-17.257-38.461-38.461V69.086c0-21.204,17.256-38.461,38.461-38.461   h351.829c21.204,0,38.461,17.257,38.461,38.461V420.914z"/>
+      </svg>
+    </label>
+  </div>
+
+  <script>
+    // Example POST method implementation:
+    async function postData(url = '', data = {}) {
+      // Default options are marked with *
+      const response = await fetch(url, {
+        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+        mode: 'cors', // no-cors, *cors, same-origin
+        cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'same-origin', // include, *same-origin, omit
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        redirect: 'follow', // manual, *follow, error
+        referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        body: JSON.stringify(data) // body data type must match "Content-Type" header
+      });
+      return response.json(); // parses JSON response into native JavaScript objects
+    }
+
+    function setLoading(){
+      document.getElementById('input-text').disabled = true
+      document.getElementById('button-submit').disabled = true
+      document.getElementById("button-submit").innerHTML = 'Prediciendo ...'
+      document.getElementById("button-submit").classList.add("loading");
+    }
+
+    function endLoading(){
+      document.getElementById('input-text').disabled = false
+      document.getElementById('button-submit').disabled = false
+      document.getElementById("button-submit").innerHTML = 'Predecir sentimiento'
+      document.getElementById("button-submit").classList.remove("loading");
+    }
+
+    function showPredict(positive=false){
+      document.getElementById("result-text").innerHTML = !!positive? 'Positivo' : 'Negativo'
+      document.getElementById("result-text").classList.remove("text-green-700");
+      document.getElementById("result-text").classList.remove("text-red-700");
+      document.getElementById("result-text").classList.add(!!positive? 'text-green-700' : 'text-red-700');
+      document.getElementById("result-check").checked = positive
+      document.getElementById("result").style.display = ''
+    }
+
+    function processForm(e) {
+        if (e.preventDefault) e.preventDefault();
+
+        /* do what you want with the form */
+        let formData = new FormData(e.target);
+
+        //Deteccion de Vacio y si coloco una imagen, ver si este se ha respondido.
+        // Nota cuando hay una pregunta con foto pero sin respuesta se corta la validacion.
+        const dataValues = Object.fromEntries(formData.entries());
+        console.log({dataValues})
+
+        // Estado loading
+        setLoading()
+        postData('/predict', dataValues)
+          .then((data) => {
+            console.log(data); // JSON data parsed by `data.json()` call
+            showPredict(data.predict !== 'Negative')
+          })
+          .catch((e) => {
+            console.error(e); // JSON data parsed by `data.json()` call
+          })
+          .finally(()=>{
+            console.log('OK')
+            endLoading()
+          })
+
+        // You must return false to prevent the default form behavior
+        return false;
+    }
+
+    var form = document.getElementById('form-predict');
+    if (form.attachEvent) {
+        form.attachEvent("submit", processForm);
+    } else {
+        form.addEventListener("submit", processForm);
+    }
+  </script>
+
+</body>
+</html>

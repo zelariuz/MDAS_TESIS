@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, jsonify
 import requests
 import json
 
+MODE_DEV = True
+
 def get_api(method, **params):
-	url = "http://ec2-54-173-246-152.compute-1.amazonaws.com:7777/"
+	global MODE_DEV
+	url = 'http://localhost:7777/' if (MODE_DEV == True) else "http://ec2-54-173-246-152.compute-1.amazonaws.com:7777/"
 	payload = {
 	    "jsonrpc": "2.0",
 	    "method": method,
