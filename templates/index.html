@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title class="font-bold">Taller de Aplicaciones 2</title>
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
-    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="https://fastly.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <script src="{{url_for('static',filename='dist/js/jquery-1.9.1.min.js')}}"></script>
+    <script src="{{url_for('static',filename='dist/js/echarts.min.js')}}"></script>
 </head>
 <body>
   <div class="navbar min-h-min sticky z-[300] inset-x-0 top-0 shadow-lg bg-neutral text-neutral-content rounded-none ">
@@ -24,150 +24,344 @@
       </div>
     </div>
     <div class="navbar-center">
-      <p class="btn btn-ghost btn-sm normal-case text-xl">daisyUI</p>
+      <p class="btn btn-ghost btn-sm normal-case text-xl">Dashboard</p>
     </div>
     <div class="navbar-end">
-      <button class="btn btn-ghost btn-sm btn-circle">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
-      </button>
-      <button class="btn btn-ghost btn-sm btn-circle">
-        <div class="indicator">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" /></svg>
-          <span class="badge badge-xs badge-primary indicator-item"></span>
+    </div>
+  </div>
+
+<div class="grid card rounded hidden">
+  <div class="flex flex-wrap items-center justify-center w-full mb-2">
+    Cantidades de
+  </div>
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+  
+    <div class="form-control w-full">
+      <label class="flex-col">
+        <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+          Email
+        </span>
+        <input type="text" placeholder="info@site.com" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+      </label>
+    </div>
+
+    <div class="form-control w-full">
+      <label class="w-full flex-col">
+        <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+          Email
+        </span>
+        <div class="w-full flex items-stretch">
+          <input type="text" placeholder="10" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+          <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
+            USD
+          </span>
         </div>
-      </button>
+      </label>
     </div>
-  </div>
 
-
-  <div class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
-    <div id="chart-container" class="h-96 w-full"></div>
-  </div>
-
-  <div class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
-
-<div class="bg-white py-6 sm:py-8 lg:py-12">
-  <div class="max-w-screen-2xl px-4 md:px-8 mx-auto">
-    <!-- text - start -->
-    <div class="mb-10 md:mb-16">
-      <h2 class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-6">Get in touch</h2>
-
-      <p class="max-w-screen-md text-gray-500 md:text-lg text-center mx-auto">This is a section of some simple filler text, also known as placeholder text. It shares some characteristics of a real written text but is random or otherwise generated.</p>
-    </div>
-    <!-- text - end -->
-
-    <!-- form - start -->
-    <form class="max-w-screen-md grid sm:grid-cols-2 gap-4 mx-auto">
-      <div>
-        <label for="first-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">First name*</label>
-        <input name="first-name" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
-      </div>
-
-      <div>
-        <label for="last-name" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Last name*</label>
-        <input name="last-name" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
-      </div>
-
-      <div class="sm:col-span-2">
-        <label for="company" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Company</label>
-        <input name="company" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
-      </div>
-
-      <div class="sm:col-span-2">
-        <label for="email" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Email*</label>
-        <input name="email" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
-      </div>
-
-      <div class="sm:col-span-2">
-        <label for="subject" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Subject*</label>
-        <input name="subject" class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2" />
-      </div>
-
-      <div class="sm:col-span-2">
-        <label for="message" class="inline-block text-gray-800 text-sm sm:text-base mb-2">Message*</label>
-        <textarea name="message" class="w-full h-64 bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"></textarea>
-      </div>
-
-      <div class="sm:col-span-2 flex justify-between items-center">
-        <button class="inline-block bg-indigo-500 hover:bg-indigo-600 active:bg-indigo-700 focus-visible:ring ring-indigo-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3">Send</button>
-
-        <span class="text-gray-500 text-sm">*Required</span>
-      </div>
-
-      <p class="text-gray-400 text-xs">By signing up to our newsletter you agree to our <a href="#" class="hover:text-indigo-500 active:text-indigo-600 underline transition duration-100">Privacy Policy</a>.</p>
-    </form>
-    <!-- form - end -->
   </div>
 </div>
 
+  <div class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
+
+    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+      <input type="checkbox" checked /> 
+      <div class="collapse-title text-xl font-medium">
+        Características del edificio
+      </div>
+      <div class="collapse-content"> 
+        <div class="flex flex-col w-full border-opacity-50">
+
+          <div class="grid card rounded">
+            <div class="flex flex-wrap items-center justify-center w-full mb-2">
+              Cantidades de
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+            
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Estacionamientos de visita
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Quinchos
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Salas de Reuniones
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Bicicleteros
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Acensores
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Estacionamientos
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Bodegas
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Departamentos
+                  </span>
+                  <input type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+            </div>
+          </div>
+          <div class="divider my-0"></div>
+          <div class="grid card rounded">
+            <div class="flex flex-wrap items-center justify-center w-full mb-2">
+              Posee consumos de
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
+            
+              <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                  <input type="checkbox" class="toggle" />
+                  <span class="label-text  ml-2">Agua potable</span> 
+                </label>
+              </div>
+
+              <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                  <input type="checkbox" class="toggle" />
+                  <span class="label-text  ml-2">Calefacción</span> 
+                </label>
+              </div>
+
+              <div class="form-control">
+                <label class="label cursor-pointer justify-start">
+                  <input type="checkbox" class="toggle" />
+                  <span class="label-text  ml-2">Agua caliente</span> 
+                </label>
+              </div>
+
+            </div>
+          </div>
+          <div class="divider my-0"></div>
+          <div class="grid card rounded">
+            <div class="flex flex-wrap items-center justify-center w-full mb-2">
+              Otros
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            
+              <div class="form-control w-full">
+                <label class="flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Entrega oficial
+                  </span>
+                  <input type="number" min="1900" value="1900" placeholder="info@site.com" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="w-full flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Dimension total entre los departamentos
+                  </span>
+                  <div class="w-full flex items-stretch">
+                    <input type="number" step=any min="0" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                    <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
+                      m<sup>2</sup>
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box">
+      <input type="checkbox" checked /> 
+      <div class="collapse-title text-xl font-medium">
+        Características del departamento
+      </div>
+      <div class="collapse-content"> 
+        <div class="flex flex-col w-full border-opacity-50">
+
+          <div class="grid card rounded">
+            <div class="flex flex-wrap items-center justify-center w-full mb-2">
+              Valores de
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            
+              <div class="form-control w-full">
+                <label class="w-full flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Prorrateo
+                  </span>
+                  <div class="w-full flex items-stretch">
+                    <input type="number" step=any min="0" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                    <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
+                      %
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+              <div class="form-control w-full">
+                <label class="w-full flex-col">
+                  <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
+                    Promedio de gasto comun
+                  </span>
+                  <div class="w-full flex items-stretch">
+                    <input type="number" step=any min="0" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                    <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
+                      UF
+                    </span>
+                  </div>
+                </label>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="button-submit" type="submit" class="mt-3 btn flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded w-full" type="button">
+      Predecir Gastos comunes
+    </button>
 
   </div>
 
   <div class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
 
     <div class="tabs">
-      <a class="tab tab-lifted">Normal</a> 
-      <a class="tab tab-lifted tab-active">Normal</a> 
-      <a class="tab tab-lifted">Normal</a>
+      <a class="tab tab-lifted">Doble Cluster</a> 
+      <a class="tab tab-lifted tab-active">Unico Cluster</a> 
     </div>
 
-    <div class="bg-base-300 rounded-b-box rounded-tr-box relative overflow-x-auto min-h-[6rem]">
-       <div class="preview border-base-300 bg-base-200 rounded-b-box rounded-tr-box flex min-h-[6rem] flex-wrap items-center justify-center gap-2 overflow-x-hidden border bg-cover bg-top p-4 undefined hidden" style="background-size: 5px 5px">
-          <div class="flex flex-col items-center gap-6">
-             <div class="tabs"><a class="tab tab-xs tab-lifted">Tiny</a> <a class="tab tab-xs tab-lifted tab-active">Tiny</a> <a class="tab tab-xs tab-lifted">Tiny</a></div>
-             <div class="tabs"><a class="tab tab-sm tab-lifted">Small</a> <a class="tab tab-sm tab-lifted tab-active">Small</a> <a class="tab tab-sm tab-lifted">Small</a></div>
-             <div class="tabs"><a class="tab tab-lifted">Normal</a> <a class="tab tab-lifted tab-active">Normal</a> <a class="tab tab-lifted">Normal</a></div>
-             <div class="tabs"><a class="tab tab-lg tab-lifted">Large</a> <a class="tab tab-lg tab-lifted tab-active">Large</a> <a class="tab tab-lg tab-lifted">Large</a></div>
-          </div>
+    <div class="rounded-b-box rounded-tr-box relative overflow-x-auto min-h-[6rem] w-full">
+       <div class="border-base-300 rounded-b-box rounded-tr-box flex min-h-[6rem] flex-wrap items-center justify-center gap-2 overflow-x-hidden border bg-cover bg-top p-4 undefined w-full">
+          
+        <div class="overflow-x-auto">
+          <table class="table table-compact w-full">
+            <!-- head -->
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Job</th>
+                <th>Favorite Color</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- row 1 -->
+              <tr>
+                <th>1</th>
+                <td>Cy Ganderton</td>
+                <td>Quality Control Specialist</td>
+                <td>Blue</td>
+              </tr>
+              <!-- row 2 -->
+              <tr class="active">
+                <th>2</th>
+                <td>Hart Hagerty</td>
+                <td>Desktop Support Technician</td>
+                <td>Purple</td>
+              </tr>
+              <!-- row 3 -->
+              <tr>
+                <th>3</th>
+                <td>Brice Swyre</td>
+                <td>Tax Accountant</td>
+                <td>Red</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+
+        <table class="table table-compact w-full">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Job</th>
+              <th>Favorite Color</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            <tr>
+              <th>1</th>
+              <td>Cy Ganderton</td>
+              <td>Quality Control Specialist</td>
+              <td>Blue</td>
+            </tr>
+            <!-- row 2 -->
+            <tr class="active">
+              <th>2</th>
+              <td>Hart Hagerty</td>
+              <td>Desktop Support Technician</td>
+              <td>Purple</td>
+            </tr>
+            <!-- row 3 -->
+            <tr>
+              <th>3</th>
+              <td>Brice Swyre</td>
+              <td>Tax Accountant</td>
+              <td>Red</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <div id="chart-container" class="h-96 w-full"></div>
+
        </div>
     </div>
 
   </div>
-
-  <div class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
-
-    <div class="overflow-x-auto">
-      <table class="table table-compact w-full">
-        <!-- head -->
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Job</th>
-            <th>Favorite Color</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- row 1 -->
-          <tr>
-            <th>1</th>
-            <td>Cy Ganderton</td>
-            <td>Quality Control Specialist</td>
-            <td>Blue</td>
-          </tr>
-          <!-- row 2 -->
-          <tr class="active">
-            <th>2</th>
-            <td>Hart Hagerty</td>
-            <td>Desktop Support Technician</td>
-            <td>Purple</td>
-          </tr>
-          <!-- row 3 -->
-          <tr>
-            <th>3</th>
-            <td>Brice Swyre</td>
-            <td>Tax Accountant</td>
-            <td>Red</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-
-  </div>
-
-
-
 
   <div class="h-screen flex flex-col items-center justify-center">
     <p class="text-green-700 text-xl mb-3">
