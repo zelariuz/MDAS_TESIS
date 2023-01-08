@@ -3,6 +3,22 @@ import joblib
 import pickle
 
 ## -------- Librerias de colab -------
+import numpy as np
+import json
+import requests
+import pandas as pd
+from sklearn.cluster import KMeans
+import math
+# Cluster
+from sklearn.cluster import DBSCAN
+from sklearn.neighbors import NearestNeighbors
+
+#Series de Tiempo (Medias moviles)
+from statsmodels.tsa.statespace.sarimax import SARIMAX
+from statsmodels.tsa.seasonal import seasonal_decompose
+import statsmodels.api as sm
+from pandas.tseries.offsets import DateOffset
+
 #Ingesta
 import pandas as pd
 
