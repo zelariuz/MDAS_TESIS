@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title class="font-bold">Taller de Aplicaciones 2</title>
+    <title class="font-bold">Dashboard Tesis</title>
     <link rel="stylesheet" href="{{url_for('static',filename='dist/css/output.css')}}">
     <script src="{{url_for('static',filename='dist/js/jquery-1.9.1.min.js')}}"></script>
     <script src="{{url_for('static',filename='dist/js/echarts.min.js')}}"></script>
@@ -17,9 +17,11 @@
           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" /></svg>
         </label>
         <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-neutral text-neutral-content rounded-box w-52">
-          <li><a>Homepage</a></li>
-          <li><a>Portfolio</a></li>
-          <li><a>About</a></li>
+          <li><button onclick="setDataForm(1)">Prueba 1</button></li>
+          <li><button onclick="setDataForm(2)">Prueba 2</button></li>
+          <li><button onclick="setDataForm(3)">Prueba 3</button></li>
+          <li><button onclick="setDataForm(4)">Prueba 4</button></li>
+          <li><button onclick="setDataForm(5)">Prueba 5</button></li>
         </ul>
       </div>
     </div>
@@ -808,6 +810,120 @@
     }
 
     window.addEventListener('resize', grafClust2.resize);
+
+  </script>
+
+  <script type="text/javascript">
+    function updateFormData(data) {
+      if (!data){
+        return
+      }
+      for (let keyName of Object.keys(data)){
+        let value = data[keyName]
+        if (typeof value === 'boolean'){
+          document.getElementsByName(keyName)[0].checked = !!value
+        }else{
+          document.getElementsByName(keyName)[0].value = value
+        }
+      }
+    }
+
+    function setDataForm(n){
+      let data = null
+      if (n == 1){
+        data = {
+          "N_ESTACIONAMIENTO_VISITA": "0",
+          "N_QUINCHOS": "0",
+          "N_SALAS_REUNIONES": "0",
+          "N_BICICLETERO": "0",
+          "N_ACENSORES": "2",
+          "N_ESTACIONAMIENTOS": "0",
+          "N_BODEGA": "0",
+          "N_DEPTOS": "16",
+          "CONSUMO_AGUA_POTABLE": true,
+          "CONSUMO_CALEFACCION": false,
+          "CONSUMO_AGUA_CALIENTE": false,
+          "ENTREGA_OFICIAL": "1978",
+          "M_TOTAL": "2058.82",
+          "PRORRATEO": "6.1200",
+          "GC_MEAN": "6.759391"
+        }
+      }else if (n == 2){
+        data = {
+          "N_ESTACIONAMIENTO_VISITA": "0",
+          "N_QUINCHOS": "0",
+          "N_SALAS_REUNIONES": "0",
+          "N_BICICLETERO": "0",
+          "N_ACENSORES": "2",
+          "N_ESTACIONAMIENTOS": "34",
+          "N_BODEGA": "234",
+          "N_DEPTOS": "234",
+          "CONSUMO_AGUA_POTABLE": false,
+          "CONSUMO_CALEFACCION": false,
+          "CONSUMO_AGUA_CALIENTE": true,
+          "ENTREGA_OFICIAL": "2012",
+          "M_TOTAL": "11643.47",
+          "PRORRATEO": "0.402041",
+          "GC_MEAN": "1.9819014763"
+        }
+      }else if (n == 3){
+        data = {
+          "N_ESTACIONAMIENTO_VISITA": "0",
+          "N_QUINCHOS": "0",
+          "N_SALAS_REUNIONES": "0",
+          "N_BICICLETERO": "0",
+          "N_ACENSORES": "2",
+          "N_ESTACIONAMIENTOS": "34",
+          "N_BODEGA": "234",
+          "N_DEPTOS": "234",
+          "CONSUMO_AGUA_POTABLE": false,
+          "CONSUMO_CALEFACCION": false,
+          "CONSUMO_AGUA_CALIENTE": true,
+          "ENTREGA_OFICIAL": "2012",
+          "M_TOTAL": "11643.47",
+          "PRORRATEO": "0.281704",
+          "GC_MEAN": "1.5087724104"
+        }
+      }else if (n == 4){
+        data = {
+          "N_ESTACIONAMIENTO_VISITA": "0",
+          "N_QUINCHOS": "0",
+          "N_SALAS_REUNIONES": "0",
+          "N_BICICLETERO": "0",
+          "N_ACENSORES": "2",
+          "N_ESTACIONAMIENTOS": "201",
+          "N_BODEGA": "0",
+          "N_DEPTOS": "213",
+          "CONSUMO_AGUA_POTABLE": false,
+          "CONSUMO_CALEFACCION": true,
+          "CONSUMO_AGUA_CALIENTE": false,
+          "ENTREGA_OFICIAL": "2013",
+          "M_TOTAL": "11473.43",
+          "PRORRATEO": "0.4364",
+          "GC_MEAN": "2.233487025"
+        }
+      }else if (n == 5){
+        data = {
+          "N_ESTACIONAMIENTO_VISITA": "0",
+          "N_QUINCHOS": "4",
+          "N_SALAS_REUNIONES": "3",
+          "N_BICICLETERO": "5",
+          "N_ACENSORES": "2",
+          "N_ESTACIONAMIENTOS": "5",
+          "N_BODEGA": "296",
+          "N_DEPTOS": "296",
+          "CONSUMO_AGUA_POTABLE": false,
+          "CONSUMO_CALEFACCION": true,
+          "CONSUMO_AGUA_CALIENTE": false,
+          "ENTREGA_OFICIAL": "2007",
+          "M_TOTAL": "14406.39",
+          "PRORRATEO": "0.3778",
+          "GC_MEAN": "3.2296285141"
+        }
+      }
+
+      updateFormData(data)
+    }
 
   </script>
 
