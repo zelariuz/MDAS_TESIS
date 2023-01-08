@@ -87,7 +87,7 @@
                     <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
                       Acensores
                     </span>
-                    <input predict name="N_ACENSORES" type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                    <input predict name="N_ACENSORES" type="number" min="0" value="2" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
                   </label>
                 </div>
 
@@ -114,7 +114,7 @@
                     <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
                       Departamentos
                     </span>
-                    <input predict name="N_DEPTOS" type="number" min="0" value="0" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                    <input predict name="N_DEPTOS" type="number" min="0" value="16" placeholder="" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
                   </label>
                 </div>
 
@@ -129,7 +129,7 @@
               
                 <div class="form-control">
                   <label class="label cursor-pointer justify-start">
-                    <input predict name="CONSUMO_AGUA_POTABLE" type="checkbox" class="toggle" />
+                    <input predict name="CONSUMO_AGUA_POTABLE" type="checkbox" class="toggle" checked />
                     <span class="label-text  ml-2">Agua potable</span> 
                   </label>
                 </div>
@@ -162,7 +162,7 @@
                     <span class="rounded-bl-none rounded-br-none rounded-lg flex px-4 bg-gray-200 items-center">
                       Entrega oficial
                     </span>
-                    <input predict name="ENTREGA_OFICIAL" type="number" min="1900" value="1900" placeholder="info@site.com" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
+                    <input predict name="ENTREGA_OFICIAL" type="number" min="1900" value="1978" placeholder="info@site.com" class="input input-sm w-full input-bordered rounded-none rounded-br-lg rounded-bl-lg" />
                   </label>
                 </div>
 
@@ -172,7 +172,7 @@
                       Dimension total entre los departamentos
                     </span>
                     <div class="w-full flex items-stretch">
-                      <input predict name="M_TOTAL" type="number" step=any min="0" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                      <input predict name="M_TOTAL" type="number" step=any min="0" value="2058.82" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
                       <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
                         m<sup>2</sup>
                       </span>
@@ -206,7 +206,7 @@
                       Prorrateo
                     </span>
                     <div class="w-full flex items-stretch">
-                      <input predict name="PRORRATEO" type="number" step=any min="0" max="100" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                      <input predict name="PRORRATEO" type="number" step=any min="0" max="100" value="6.1200" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
                       <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
                         %
                       </span>
@@ -220,7 +220,7 @@
                       Promedio de gasto comun
                     </span>
                     <div class="w-full flex items-stretch">
-                      <input predict name="GC_MEAN" type="number" step=any min="0" value="0" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
+                      <input predict name="GC_MEAN" type="number" step=any min="0" value="6.759391" class="input w-full input-sm isolate input-bordered rounded-none rounded-bl-lg" />
                       <span class="rounded-bl-none rounded-none rounded-br-lg flex px-4 bg-base-300 items-center">
                         UF
                       </span>
@@ -242,7 +242,7 @@
 
   <div class="hidden loading"></div>
 
-  <div id="cont-result" class="hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
+  <div id="cont-result" class="hidden hero-content w-full m-auto bg-white shadow-lg items-start block mt-1">
 
     <div class="tabs -mb-px">
       <button id="tab-clust-2" onclick="setTab(2)" class="tab tab-lifted tab-active">Doble Cluster</button> 
@@ -263,7 +263,7 @@
               <tbody>
                 <!-- row 1 -->
                 <tr>
-                  <td>1</td>
+                  <td id="EDI_CLUSTER">1</td>
                 </tr>
               </tbody>
             </table>
@@ -277,7 +277,7 @@
               <tbody>
                 <!-- row 1 -->
                 <tr>
-                  <td>0</td>
+                  <td id="DEP_CLUSTER">0</td>
                 </tr>
               </tbody>
             </table>
@@ -285,13 +285,13 @@
               <!-- head -->
               <thead>
                 <tr>
-                  <th>Gasto común promedio (UF)</th>
+                  <th>Gasto común promedio</th>
                 </tr>
               </thead>
               <tbody>
                 <!-- row 1 -->
                 <tr>
-                  <td>1233</td>
+                  <td id="GC_MEAN">1233</td>
                 </tr>
               </tbody>
             </table>
@@ -302,10 +302,10 @@
               <thead>
                 <tr>
                   <th>Mes</th>
-                  <th>Gasto común promedio (UF)</th>
+                  <th>Gasto común promedio</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="TABLE_MONTH">
                 <!-- row 1 -->
                 <tr>
                   <td>Enero</td>
@@ -365,7 +365,7 @@
               <tbody>
                 <!-- row 1 -->
                 <tr>
-                  <td>1</td>
+                  <td id="EDI_DEP_CLUSTER">1</td>
                 </tr>
               </tbody>
             </table>
@@ -373,13 +373,13 @@
               <!-- head -->
               <thead>
                 <tr>
-                  <th>Gasto común promedio (UF)</th>
+                  <th>Gasto común promedio</th>
                 </tr>
               </thead>
               <tbody>
                 <!-- row 1 -->
                 <tr>
-                  <td>1233</td>
+                  <td id="EDI_DEP_GC_MEAN">1233</td>
                 </tr>
               </tbody>
             </table>
@@ -390,10 +390,10 @@
               <thead>
                 <tr>
                   <th>Mes</th>
-                  <th>Gasto común promedio (UF)</th>
+                  <th>Gasto común promedio</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="EDI_DEP_TABLE_MONTH">
                 <!-- row 1 -->
                 <tr>
                   <td>Enero</td>
@@ -546,16 +546,137 @@
       }
       console.log({out})
 
-      return data
+      return out
     }
 
-    function showPredict(positive=false){
-      // document.getElementById("result-text").innerHTML = !!positive? 'Positivo' : 'Negativo'
-      // document.getElementById("result-text").classList.remove("text-green-700");
-      // document.getElementById("result-text").classList.remove("text-red-700");
-      // document.getElementById("result-text").classList.add(!!positive? 'text-green-700' : 'text-red-700');
-      // document.getElementById("result-check").checked = positive
-      // document.getElementById("result").style.display = ''
+    function formatFloat(value){
+      value = (!!value && value!='')? parseFloat(value).toFixed(3) + ' UF' : '---'
+      return String(value).replace('.',',')
+    }
+
+    function getGcMean(data){
+      if (!data){
+        return 'Sin datos'
+      }
+      return formatFloat(data["('SUBTOTAL_GC', 'mean')"])
+    }
+
+    function getMonth(str){
+      let trad = {'01':'Enero', '02':'Febrero', '03':'Marzo', '04':'Abril', '05':'Mayo', '06':'Junio', '07':'Julio', '08':'Agosto', '09': 'Septiembre', '10': 'Octubre', '11': 'Noviembre', '12': 'Diciembre'}
+      return trad[str]
+    }
+
+    function processTableMonth(id, data){
+      let tbody = document.getElementById(id)
+      tbody.innerHTML = ''
+      console.log({data})
+      for (let e of data){
+        let tr = document.createElement('tr')
+        tr.innerHTML = `<td>${getMonth(e["('GC_MES', '')"])}</td><td>${formatFloat(e["('SUBTOTAL_GC', 'mean')"])}</td>`
+        tbody.innerHTML += tr.outerHTML
+      }
+    }
+
+    function processGraf(id, echartObject, data){
+      let container = document.getElementById(id)
+      if (!data){
+        container.classList.add("hidden");
+        return
+      }
+      container.classList.remove("hidden");
+
+      let ejeX = []
+      let serieGC = []
+      let serieForecast = []
+
+      for (let e of data){
+        ejeX.push(e["month"])
+        serieGC.push(!!e["SUBTOTAL_GC_MEAN"]? e["SUBTOTAL_GC_MEAN"] : '')
+        serieForecast.push(!!e["forecast_year"]? e["forecast_year"] : '')
+      }
+
+      let option = {
+        title: {
+          text: 'Predicciones de 12 meses',
+          left: 'center'
+        },
+        legend: {
+          data: ['Serie', 'Prediccion'],
+          right: "0%",
+        },
+        dataZoom: [
+          {
+            type: 'inside',
+            start: 50,
+            end: 100
+          },
+          {
+            start: 50,
+            end: 100
+          }
+        ],
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross'
+          },
+          //formatter: '<strong>{b0}</strong><br/>{c0} UF'
+          valueFormatter: formatFloat,
+          // valueFormatter: null,
+        },
+        xAxis: {
+          type: 'category',
+          data: ejeX,
+        },
+        yAxis: {
+          type: 'value',
+          axisLabel: {
+            formatter: '{value} UF'
+          }
+        },
+        series: [
+          {
+            data: serieGC,
+            type: 'line',
+            name: 'Serie',
+          },
+          {
+            data: serieForecast,
+            type: 'line',
+            name: 'Prediccion',
+          }
+        ]
+      };
+
+      echartObject.setOption(option);
+      echartObject.resize();
+    }
+
+    function showPredict(predict){
+
+      let contresult = document.getElementById('cont-result')
+      contresult.classList.remove("hidden");
+      contresult.scrollIntoView({
+        behavior: 'smooth'
+      });
+      // window.scrollTo(contresult.offsetLeft,contresult.offsetTop);
+
+      let oneCluster = predict.oneCluster
+      let twoCluster = predict.twoCluster
+      // 1 claster
+      document.getElementById("EDI_DEP_CLUSTER").innerHTML = oneCluster.EDI_DEP_CLUSTER
+      document.getElementById("EDI_DEP_GC_MEAN").innerHTML = getGcMean(oneCluster.gc_mean)
+      processTableMonth('EDI_DEP_TABLE_MONTH', oneCluster.gc_month)
+      processGraf('graf-clust-1', grafClust1, oneCluster.forecast)
+
+      // 2 claster
+      document.getElementById("EDI_CLUSTER").innerHTML = twoCluster.EDI_CLUSTER
+      document.getElementById("DEP_CLUSTER").innerHTML = twoCluster.DEP_CLUSTER
+      document.getElementById("GC_MEAN").innerHTML = getGcMean(twoCluster.gc_mean)
+      processTableMonth('TABLE_MONTH', twoCluster.gc_month)
+      processGraf('graf-clust-2', grafClust2, twoCluster.forecast)
+
+
     }
 
     function processForm(e) {
@@ -570,10 +691,10 @@
 
         // Estado loading
         setLoading()
-        postData('/predict', preprocessData(dataValues))
+        postData('/predict', {data:preprocessData(dataValues)})
           .then((data) => {
             console.log(data); // JSON data parsed by `data.json()` call
-            showPredict(data.predict !== 'Negative')
+            showPredict(data.predict)
           })
           .catch((e) => {
             console.error(e); // JSON data parsed by `data.json()` call

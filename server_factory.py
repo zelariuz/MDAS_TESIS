@@ -14,7 +14,7 @@ from twisted.internet.defer import inlineCallbacks
 # from library.models import EndpointModels
 
 #Utilidades
-from library.utils import decodeFile, encodeFile, createTestFile, loadModelObjectFile, trainingModelBase
+from library.utils import decodeFile, encodeFile, createTestFile, loadModels, trainingModels, predictData
 
 class ServerFactory(jsonrpc.JSONRPC):
 	"""
@@ -41,53 +41,42 @@ class ServerFactory(jsonrpc.JSONRPC):
 		return jsonResponse
 
 	@inlineCallbacks
-	def jsonrpc_testEncodeFile(self):
-		"""
-			Para indicar si el reactor esta vivo.
-		"""
-		createTestFile('model/test_load.model')
-		modelDataBase64 = encodeFile('model/test_load.model')
-
-		jsonResponse = {'response' : 1, 'modelDataBase64' : modelDataBase64}
-		yield 1+1 # condicion minima para que sea un diferido
-		return jsonResponse
-
-	@inlineCallbacks
-	def jsonrpc_uploadModelFileData(self, modelDataBase64 = ''):
-		"""
-			Subida del modelo en base 64
-		"""
-		print('modelDataBase64', modelDataBase64)
-		decodeFile('model/test.model', modelDataBase64)
-		f = loadModelObjectFile('model/test.model')
-		print('loadModelObjectFile', f)
-
-		jsonResponse = {'response' : 1, 'modelDataBase64' : modelDataBase64}
-		yield 1+1 # condicion minima para que sea un diferido
-		return jsonResponse
-
-	@inlineCallbacks
 	def jsonrpc_createBaseModel(self):
 		"""
 			Creamos el modelo base
 		"""
-		filename = 'model/modelBase.model'
-		trainingModelBase(filename)
+		filename = 'model/model.models'
+		trainingModels(filename)
 
 		jsonResponse = {'response' : 1}
 		yield 1+1 # condicion minima para que sea un diferido
 		return jsonResponse
 
 	@inlineCallbacks
-	def jsonrpc_predict(self, text = ''):
+	def jsonrpc_predict(self, data):
 		"""
 			Creamos el modelo base
 		"""
-		filename = 'model/modelBase.model'
-		model_lr = loadModelObjectFile(filename)
+		filename = 'model/model.models'
+		models = loadModels(filename)
 
-		result = model_lr.predict([text])
+		predict = predictData(models, **data['EDI'], **data['DEP'])
+		# result = model_lr.predict([text])
 
-		jsonResponse = {'response' : 1, 'predict': ('Positive' if result[0] == 1 else 'Negative')}
+		# predict = {
+		# 	'oneCluster' : {
+		# 		'data' : [],
+		# 		'forecast' : [],
+		# 		'cluster' : 1,
+		# 	},
+		# 	'soubleCluster' : {
+		# 		'data' : [],
+		# 		'forecast' : [],
+		# 		'clusterEdi' : 5,
+		# 		'clusterDep' : 2,
+		# 	}
+		# }
+
+		jsonResponse = {'response' : 1, 'predict': predict}
 		yield 1+1 # condicion minima para que sea un diferido
 		return jsonResponse
