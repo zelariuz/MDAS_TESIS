@@ -6,6 +6,7 @@ ign_*
 *.log*
 *.pid
 *.model
+*.models
 *.modelb64
 node_modules
 app.id
